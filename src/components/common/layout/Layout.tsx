@@ -1,9 +1,9 @@
 import React from 'react';
 
 
-const Layout = (props: {
+function Layout(props: {
     children : React.ReactNode
-}) => {
+}) {
     return(
         <div>
             <main>

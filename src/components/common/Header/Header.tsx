@@ -14,7 +14,7 @@ const Title = styled.h1`
     color : white;
 `
 
-const Header = () => {
+function Header() {
     return(
         <header>
             <Container>
@@ -25,3 +25,5 @@ const Header = () => {
         </header>
     )
 }
+
+export default Header

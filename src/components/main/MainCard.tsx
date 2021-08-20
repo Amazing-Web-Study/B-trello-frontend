@@ -1,7 +1,7 @@
 import React from 'react';
 
 
-const MainCard = (props: any) => {
+function MainCard(props: any) {
     console.log(props);
     return (
         <div className="card">

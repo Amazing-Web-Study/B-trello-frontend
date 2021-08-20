@@ -6,7 +6,7 @@ const Container = styled.div`
 `
 
 
-const Footer = () => {
+function Footer() {
     return(
         <footer>
             <h2>this is footer</h2>
