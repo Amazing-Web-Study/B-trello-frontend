@@ -3,7 +3,7 @@ import MainCard from "../main/MainCard";
 import {cards} from "../../api/cards";
 //import Layout from "../common/layout/Layout";
 //import Header from "../common/Header/Header";
-import {Footer} from "../common/Footer/Footer"
+import Footer from "../common/Footer/Footer"
 
 
 // const user = {
@@ -19,9 +19,9 @@ function Main() {
             <div className="container">
                 <MainCard user={card} />
             </div>
-            <Footer />  
-        </div> 
-        
+            <Footer />
+        </div>
+
     );
 }
 
