@@ -25,7 +25,7 @@ function reducer(state:any, action:any) {
     }
 }
 
-function useFetch(callback:any, deps = []) {
+function useFetch(callback:any, deps:any = []) {
     const [state, dispatch] = useReducer(reducer, {
         loading: false,
         data: [],
@@ -37,7 +37,7 @@ function useFetch(callback:any, deps = []) {
         try {
             const response = await callback()
             let data = await response.json()
-            dispatch({type: 'SUCCESS', data: await data})
+            dispatch({type: 'SUCCESS', data: data})
         } catch (e) {
             dispatch({type: 'ERROR', error: '에러 발생'})
         }
