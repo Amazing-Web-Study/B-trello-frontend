@@ -5,8 +5,11 @@ const MainCard = (props: any) => {
     return (
         <div className="card">
             <div className="container">
-                <p>이름 : {props.user.name}</p>
-                <p>나이 : {props.user.age}</p>
+                {props.cards.map((card:any) => (
+                    <li key={card._id}>
+                        {card.content}
+                    </li>
+                ))}
             </div>
         </div>
     );
