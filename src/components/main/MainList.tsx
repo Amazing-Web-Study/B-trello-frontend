@@ -2,43 +2,53 @@ import React from 'react';
 import styled from 'styled-components';
 import MainCard from "../main/MainCard";
 import useFetch from "../../api/api";
+import { OpenCardPanelBtn, CardPanel } from "./MainElement";
 
 const Container = styled.div`
     // display : flex;
     height: fit-contents;
     width : 15rem;
     background : #ffffff;
-    margin:1rem;
+    margin:1rem; 
 `
 const Flex = styled.div`
     display : flex;
 `
 
-async function getCards() {
+// const AddCardPanel = styled.div`
+//     display : none;
+// `
+
+const getCards = async () => {
     const response = await fetch('http://localhost:8000/api/card')
     return response
 }
+// const addCard = (arg : any) => {console.log(arg)}
 
-function List({ list }: any) {
+
+const List = ({ list }: any) => {
+
     const [state] = useFetch(getCards, []);
-    const {loading, data: cards, error}:any = state
+    const { loading, data: cards, error }: any = state
+
     return (
         <Container>
-                <div className="list-header">{list.title}</div>
-                <div className="list-cards">
-                    <MainCard cards={cards}/>
-                    <a className="addCard">Add a card</a>
-                </div>
-                <div className="list-footer"></div>
+            <div className="list-header">{list.title}</div>
+            <div className="list-cards">
+                <MainCard cards={cards} />
+                <OpenCardPanelBtn listId={list._id} />
+                <CardPanel list={list} />
+            </div>
+            <div className="list-footer"></div>
         </Container>
     )
 }
 
-function MainList({ lists }: any) {
+const MainList = ({ lists }: any) => {
     return (
         <Flex>
-            {lists.map((list: any) => (
-                <List list={list} key={list._id} />
+            {lists.map((list: any , index : number) => (
+                <List list={list} index={index} key={list._id} />
             ))}
         </Flex>
     );
