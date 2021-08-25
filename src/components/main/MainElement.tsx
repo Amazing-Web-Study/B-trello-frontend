@@ -1,4 +1,4 @@
-import { is_visible } from "./MainEvent";
+import { is_visible, addCard } from "./MainEvent";
 import styled from 'styled-components';
 
 const AddCardPanelStyle = styled.div`
@@ -20,12 +20,14 @@ export const OpenCardPanelBtn = ({ listId }: any) => {
 }
 
 // 카드 추가
-export const AddCard = ({ listId }: any, { content }: any) => {
+export const AddCard = ({ listId }: any) => {
+    let element = document.getElementById("content_"+ listId);
+    
     return (
         <a
             key={listId}
             onClick={() => {
-
+                addCard(listId,element);
             }
             }>
             Add card
@@ -37,10 +39,8 @@ export const AddCard = ({ listId }: any, { content }: any) => {
 export const CardPanel = ({ list }: any) => {
     return (
         <AddCardPanelStyle id={list._id}>
-            <form>
-                <textarea id={"content_" + list._id}></textarea>
-                <AddCard></AddCard>
-            </form>
+            <textarea id={"content_" + list._id}></textarea>
+            <AddCard listId={list._id}></AddCard>
         </AddCardPanelStyle>
     )
 }
