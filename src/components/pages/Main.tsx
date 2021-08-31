@@ -1,24 +1,22 @@
 import React from 'react';
-import MainList from "../main/MainList";
+import List from "../main/List";
 import useFetch from "../../api/api";
 
-async function getCards() {
+async function getLists() {
     const response = await fetch('http://localhost:8000/api/list')
     return response
 }
 
 function Main() {
-    const [state] = useFetch(getCards, []);
-    const {loading, data: lists, error}:any = state
+    const [state] = useFetch(getLists, []);
+    const { loading, data: lists, error }: any = state
 
     if (loading) return <div>로딩중</div>
     if (error) return <div>{error}</div>
 
     return (
-        <div className="main">
-            <div className="container">
-                <MainList lists={lists} />
-            </div>
+        <div className="container">
+            <List lists={lists} />
         </div>
     );
 }
