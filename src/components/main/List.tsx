@@ -1,4 +1,4 @@
-import React,{useState, useEffect} from 'react';
+import React, { useState, useEffect } from 'react';
 import styled from 'styled-components';
 import { Card, OpenCardPanelBtn, CardPanel } from "../main/Card";
 import useFetch from "../../api/api";
@@ -9,13 +9,29 @@ const ListStyle = styled.div`
     display : flex;
 `
 
-const LisContenttStyle = styled.div`
+const ListContentStyle = styled.div`
     height : fit-contents;
     width : 15rem;
-    background : #ffffff;
     margin : 1rem;
+    border: 1px solid #ebecf0;
+    border-radius: 0.5rem;
+    background-color: #ebecf0;
+
 `
 
+const ListTitle = styled.div`
+    margin: 1rem;
+    text-align: left;
+`
+
+const ListCardsStyle = styled.div`
+    overflow-y: auto;
+    height: 51rem;
+`
+
+const ListFooterStyle = styled.div`
+
+`
 const getCards = async () => {
     const response = await fetch('http://localhost:8000/api/card')
     return response
@@ -24,20 +40,20 @@ const getCards = async () => {
 const ListContent = ({ list }: any) => {
 
     const [state] = useFetch(getCards, []);
-    const { loading, data: cards, error }: any = state
-
-    
+    const { loading, data: cards, error }: any = state;
 
     return (
-        <LisContenttStyle>
-            <div className="list-header">{list.title}</div>
-            <div className="list-cards">
+        <ListContentStyle>
+            <ListTitle>{list.title}</ListTitle>
+            <ListCardsStyle>
                 <Card cards={cards} />
-                <OpenCardPanelBtn listId={list._id} />
-                <CardPanel list={list} />
-            </div>
-            <div className="list-footer"></div>
-        </LisContenttStyle>
+
+                <ListFooterStyle>
+                    <CardPanel list={list} />
+                    <OpenCardPanelBtn listId={list._id} />
+                </ListFooterStyle>
+            </ListCardsStyle>
+        </ListContentStyle>
     )
 }
 
@@ -45,19 +61,19 @@ const ListPanel = () => {
     return (
         <PanelStyle id={"ListPanel"}>
             <input id={"List_title"} />
-            <AddList/>
+            <AddList />
         </PanelStyle>
     )
 }
 
 const AddList = () => {
-    
+
     let element = document.getElementById("ListPanel");
     let userId = "testId";
     return (
         <a
             onClick={() => {
-                addList(userId, element);
+                // addList(userId, element);
             }}>
             Add card
         </a>
@@ -81,7 +97,7 @@ const List = ({ lists }: any) => {
     return (
         <ListStyle>
             {lists.map((list: any, index: number) => (
-                <ListContent list={list} index={index} key={list._id} />
+                <ListContent list={list} index={index} />
             ))}
             <OpenListPanelBtn />
             <ListPanel />
