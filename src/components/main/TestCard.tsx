@@ -38,7 +38,7 @@ export const Card = ({ cards } : any) => {
     return (
         <div className="card">
             {cards.map((card: any) => (
-                <CardStyle key={card._id}>{card.content}</CardStyle>
+                <CardStyle key={card._id}><input type="checkbox" />{card.content}</CardStyle>
             ))}
         </div>
     );
