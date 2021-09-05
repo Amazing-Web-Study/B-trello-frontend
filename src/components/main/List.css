@@ -3,8 +3,9 @@
 }
 
 .list_content{
-    height: 48rem;
+    height: fit-content;
     overflow-y: scroll;
+    max-height: 48rem;
 }
 
 .list_panel {

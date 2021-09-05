@@ -1,18 +1,18 @@
 import React, { useState, useEffect } from "react";
 import "./List.css"
 import useFetch from "../../api/api";
-import { addCard, addList } from "./Event";
+import { addCard, addList , delCard } from "./Event";
 
 export const List = () => {
-    async function getLists() {
-        const response = await fetch('http://localhost:8000/api/list')
-        return response
-    }
-    const [state] = useFetch(getLists, []);
-    const { loading, data: lists, error }: any = state
 
-    if (loading) return <div>로딩중</div>
-    if (error) return <div>{error}</div>
+    const [lists, setLists] = useState([]);
+    let [version, setVersion] = useState(1)
+
+    useEffect(() => {
+        fetch('http://localhost:8000/api/list')
+            .then(data => data.json())
+            .then(data => setLists(data))
+    },[version])
 
     return (
         <div className="list_conponent">
@@ -28,20 +28,18 @@ export const List = () => {
 }
 
 const Cards = ({ list_id }: any) => {
-    async function getCards() {
-        const response = await fetch('http://localhost:8000/api/card')
-        return response
-    }
-    // const [data, setData] = useFetch(getCards, []);
-    var [cards, setCards] = useState([]);
-    // const { data: cards }: any = data;
+    var [cards, setCards] = useState([])
     let [version, setVersion] = useState(1)
+
     useEffect(() => {
         fetch('http://localhost:8000/api/card')
             .then(data => data.json())
             .then(data => setCards(data))
-        console.log(version)
     }, [version])
+
+    const updateState = (e : any) =>{
+        console.log(e)
+    }
 
 
     return (
@@ -49,13 +47,16 @@ const Cards = ({ list_id }: any) => {
             <div className="list_content">
                 {cards.map((card: any) => (
                     <div className="list_item" key={card._id}>
-                        <input type="checkbox" />
+                        <input type="checkbox" onChange={() => {}}/>
                         {card.content}
                         <button
                             type='button'
                             className="x_btn"
                             onClick={() => {
-
+                                delCard(card._id)
+                                setTimeout(() => { 
+                                    setVersion(version += 1)
+                                }, 0)
                             }}>
                             X
                         </button>
@@ -69,10 +70,8 @@ const Cards = ({ list_id }: any) => {
                     className="add_btn"
                     onClick={() => {
                         addCard(list_id, document.getElementById("value_" + list_id))
-                        setTimeout(() => {
+                        setTimeout(() => { 
                             setVersion(version += 1)
-                            setVersion(version += 1)
-                            console.log('version update')
                         }, 0)
                     }
                     }>Add card</button>
@@ -89,23 +88,20 @@ const ListPanel: any = () => {
                 <a
                     className={"add_btn"}
                     onClick={() => {
-
+                        addList('612b4db38a78da44945d05a5', document.getElementById("list_title"))
                     }}>
                     Add list
                 </a>
                 <a
                     // className={"x_btn"}
                     onClick={() => {
-
+                        
                     }}>
                     X
                 </a>
             </div>
             <a
-                className={"add_list_btn"}
-                onClick={() => {
-                    addList('612203c33263024508a68730', document.getElementById("list_title"))
-                }}>
+                className={"add_list_btn"}>
                 Add another list
             </a>
         </div>
