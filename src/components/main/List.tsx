@@ -35,12 +35,14 @@ const Cards = ({ list_id }: any) => {
     // const [data, setData] = useFetch(getCards, []);
     var [cards, setCards] = useState([]);
     // const { data: cards }: any = data;
-    const reload : any= [];
+    let [version, setVersion] = useState(1)
     useEffect(() => {
         fetch('http://localhost:8000/api/card')
             .then(data => data.json())
             .then(data => setCards(data))
-    }, [reload])
+        console.log(version)
+    }, [version])
+
 
     return (
         <div>
@@ -49,23 +51,31 @@ const Cards = ({ list_id }: any) => {
                     <div className="list_item" key={card._id}>
                         <input type="checkbox" />
                         {card.content}
-                        <a
+                        <button
+                            type='button'
                             className="x_btn"
                             onClick={() => {
 
                             }}>
                             X
-                        </a>
+                        </button>
                     </div>
                 ))}
             </div>
             <div className="add_panel">
                 <textarea className="text_style" id={"value_" + list_id}></textarea>
-                <a
+                <button
+                    type='button'
                     className="add_btn"
-                    onClick={() =>
-                        reload.push(addCard(list_id, document.getElementById("value_" + list_id)))
-                    }>Add card</a>
+                    onClick={() => {
+                        addCard(list_id, document.getElementById("value_" + list_id))
+                        setTimeout(() => {
+                            setVersion(version += 1)
+                            setVersion(version += 1)
+                            console.log('version update')
+                        }, 0)
+                    }
+                    }>Add card</button>
             </div>
         </div>
     )

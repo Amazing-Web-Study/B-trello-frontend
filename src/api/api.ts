@@ -37,6 +37,7 @@ function useFetch(callback:any, deps:any = []) {
         try {
             const response = await callback()
             let data = await response.json()
+            console.log(data)
             dispatch({type: 'SUCCESS', data: data})
         } catch (e) {
             dispatch({type: 'ERROR', error: '에러 발생'})
