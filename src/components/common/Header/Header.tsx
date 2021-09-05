@@ -2,27 +2,30 @@ import styled from 'styled-components';
 
 const Container = styled.div`
     position: fixed;
-    top: 0;
+    flex-direction: column;
+    top: 0px;
+    width: 100%;
     justify-content: center;
     height: auto;
-    background-color : skyblue;
+    background-color : #026aa7;
 
 `
 
 const Title = styled.h1`
-    font-size: 30px;
+    font-size: 15px;
     color : white;
 `
 
 function Header() {
     return(
-        <header>
-            <Container>
+        <Container>
+           <header>
                 <Title>
-                    Todo-List
+                    Trello
                 </Title>
-            </Container>
-        </header>
+            </header> 
+        </Container>
+        
     )
 }
 
