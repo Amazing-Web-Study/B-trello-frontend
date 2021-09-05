@@ -70,8 +70,7 @@ const Cards = ({ list_id }: any) => {
                     onClick={() => {
                         addCard(list_id, document.getElementById("value_" + list_id))
                         setTimeout(() => {
-                            setVersion(version += 1)
-                            setVersion(version += 1)
+                            setVersion(version += 10)
                             console.log('version update')
                         }, 0)
                     }
