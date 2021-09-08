@@ -2,8 +2,6 @@ import React from 'react';
 import MainCard from "../main/MainCard";
 // import {cards} from "../../api/cards";
 import Layout from "../common/layout/Layout";
-import Header from "../common/Header/Header";
-import Footer from "../common/Footer/Footer"
 import { createGlobalStyle } from 'styled-components';
 
 const GlobalStyle = createGlobalStyle`

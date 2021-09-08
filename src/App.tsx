@@ -3,8 +3,8 @@ import './App.css';
 import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
 
 import Main from "./components/pages/Main";
-import Login from './components/pages/Login'
-import LoginForm from "./components/login/LoginForm";
+import Login from './components/pages/Login';
+import Join from "./components/pages/Join";
 
 
 function App() {
@@ -14,6 +14,7 @@ function App() {
         <Switch>
           <Route path="/" component={Main} exact />
           <Route path="/login" component={Login} exact />
+          <Route path="/register" component={Join} exact />
         </Switch>
       </Router>
         

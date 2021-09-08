@@ -4,12 +4,16 @@ import LoginForm from "../login/LoginForm";
 
 function Login() {
     return (
-        <div className="main">
-            <div className="container">
-                <LoginForm />
-            </div>
-        </div>
+        <LoginForm />
     );
 }
 
 export default Login;
+
+/*
+<div className="main">
+            <div className="container">
+                <LoginForm />
+            </div>
+        </div>
+*/

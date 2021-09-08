@@ -1,7 +1,5 @@
 import React from 'react';
 import styled from "styled-components";
-import './LoginForm.css';
-
 
 const Container = styled.div`
     position: absolute;
@@ -11,7 +9,7 @@ const Container = styled.div`
     padding: 20px;
     text-align: center;
     width: 50%;
-    height: 216px;
+    height: 256px;
     box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
     box-sizing: border-box;
 `
@@ -40,50 +38,47 @@ const Button = styled.button`
     color: #fff;
     border: none;
     border-radius:0;
-    background-color: #07b353;
-`;  
-    
-const Logo = styled.img`
+    background-color: #0079bf;
+`;
+
+const Title = styled.h2`
     position: absolute;
     left: 50%;
-    top: calc(50% - 158px); //container height 반 + logo height (20)
+    top: calc(50%-128px);
     transform: translate(-50%, -50%);
 `
 
-function LoginForm() {
+function JoinForm() {
     
-    //submit event handler
     const handleSubmit = () => {
-        fetch('http://localhost:8000/api/user/sign-in', {
+        fetch('http://localhost:8000/api/user/sign-up', {
             method: "POST",
             body: JSON.stringify({
                 id: "",
+                name: "",
                 password: "",
             })
         }).then(res => console.log(res));
     }
-
-    return (
+    return(
         <div>
-            <Logo className ="trello-logo" src="/img/trello-logo-blue.png" />
+            <Title>Create a Trello Account</Title>
             <Container>
                 <form onSubmit={handleSubmit}>
-                    <Input id="id" name="id" type="email" placeholder="Enter email" />
+                    <Input id="id" name="name" placeholder="Name" />
+                    <Input id="id" name="id" type="email" placeholder="email" />
                     <Input
                         id="password"
                         name="password"
                         type="password"
-                        placeholder="Enter password"
+                        placeholder="password"
                     />
-                    <Button type="submit">Login</Button>
-                    
+                    <Button type="submit">Create New Account</Button>
                 </form>
-            </Container>
-
+            </Container>  
         </div>
-            
-
+        
     );
 }
 
-export default LoginForm;
+export default JoinForm;
