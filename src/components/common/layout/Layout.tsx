@@ -1,16 +1,20 @@
 import React from 'react';
 import Header from "../Header/Header"
+import styled from 'styled-components';
 
-
+const Main = styled.main`
+    margin-top: 2rem;
+    background-color : #0079bf;
+`
 function Layout(props: {
     children : React.ReactNode
 }) {
     return(
         <div>
             <Header />
-            <main>
+            <Main>
                 {props.children}
-            </main>
+            </Main>
         </div>
     )
 }
