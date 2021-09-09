@@ -44,7 +44,7 @@ const Button = styled.button`
 const Title = styled.h2`
     position: absolute;
     left: 50%;
-    top: calc(50%-128px);
+    top: calc(50% - 168px);
     transform: translate(-50%, -50%);
 `
 
