@@ -46,7 +46,7 @@ const Button = styled.button`
 const Logo = styled.img`
     position: absolute;
     left: 50%;
-    top: calc(50% - 158px); //container height 반 + logo height (20)
+    top: calc(50% - 158px);
     transform: translate(-50%, -50%);
 `
 
