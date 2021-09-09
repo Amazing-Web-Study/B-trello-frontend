@@ -44,10 +44,6 @@
     ]
   },
   "devDependencies": {
-<<<<<<< HEAD
-    "@types/styled-components": "^5.1.12"
-=======
     "@types/styled-components": "^5.1.14"
->>>>>>> 189c13c2e4fbd339150fe8cdb111b0b645dc7977
   }
 }
