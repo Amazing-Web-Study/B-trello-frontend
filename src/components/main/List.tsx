@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import "./List.css"
-import { addCard, addList, delCard ,delList , updateList} from "./Event";
+import { addCard, addList, delCard ,delList , updateCard, is_visible} from "./Event";
 import { type } from "os";
 
 export const List = () => {
@@ -35,7 +35,9 @@ export const List = () => {
                 </div>
             ))}
             <div className={"list_panel_wrapper"}>
-                <div className="add_panel disp" >
+                <div 
+                id={"addList"}
+                className="add_panel disp" >
                     <input type="text" id={"list_title"} />
                     <a
                         className={"add_btn"}
@@ -47,15 +49,11 @@ export const List = () => {
                         }}>
                         Add list
                     </a>
-                    <a
-                        // className={"x_btn"}
-                        onClick={() => {
-
-                        }}>
-                        X
-                    </a>
                 </div>
                 <a
+                    onClick={() => {
+                        is_visible(document.getElementById("addList"));
+                    }}
                     className={"add_list_btn"}>
                     Add another list
                 </a>
@@ -74,11 +72,6 @@ const Cards = ({ list_id }: any) => {
             .then(data => setCards(data))
     }, [version])
 
-    const updateState = (e: any) => {
-        console.log(e)
-    }
-
-    console.log(cards)
     return (
         <div>
             <div className="list_content">
@@ -86,12 +79,11 @@ const Cards = ({ list_id }: any) => {
                     <div className="list_item" key={card._id}>
                         
                         <input type="checkbox" 
-                        checked={card.state === 0 ? false : true} 
+                        checked={card.state == 0 ? false : true} 
                         onChange={() => {
-                            console.log(card.state)
-                            updateList(card._id,card.state === 0 ? 1 : 0) 
+                            updateCard(card._id,card.state) 
                             setTimeout(() => {
-                                setVersion(version += 1)
+                                setVersion(version += 10)
                             })
                          }} />
                         {card.content}
@@ -101,7 +93,7 @@ const Cards = ({ list_id }: any) => {
                             onClick={() => {
                                 delCard(card._id)
                                 setTimeout(() => {
-                                    setVersion(version += 1)
+                                    setVersion(version += 10)
                                 }, 0)
                             }}>
                             X
@@ -117,7 +109,7 @@ const Cards = ({ list_id }: any) => {
                     onClick={() => {
                         addCard(list_id, document.getElementById("value_" + list_id))
                         setTimeout(() => {
-                            setVersion(version += 1)
+                            setVersion(version += 10)
                         }, 0)
                     }
                     }>Add card</button>
