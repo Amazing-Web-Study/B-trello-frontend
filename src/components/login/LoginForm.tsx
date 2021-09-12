@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useState} from 'react';
 import styled from "styled-components";
 import './LoginForm.css';
 
@@ -51,16 +51,35 @@ const Logo = styled.img`
 `
 
 function LoginForm() {
+
+    const [id, setId] = useState('')
+    const [pw, setPw] = useState('')
+    const [cookie, setCookie] = useState('')
+
+    const changeId = (value: any) => {
+        setId(value.target.value)
+    }
+    const changePw = (value: any) => {
+        setPw(value.target.value)
+    }
     
     //submit event handler
-    const handleSubmit = () => {
+    const handleSubmit = (e: any) => {
+        e.preventDefault() // submit 함수 실행시 페이지가 새로고침 되는걸 막기 위한 코드
         fetch('http://localhost:8000/api/user/sign-in', {
+            credentials: 'include', // 동일 도메인 에서만 전송가능한 쿠키를 다른 도메인도 허용해줍니다
             method: "POST",
+            headers: {
+                'Accept': 'application/json',
+                'Content-Type': 'application/json' //content type을 json 형식으로 보내주기 위함입니다.
+            },
             body: JSON.stringify({
-                id: "",
-                password: "",
+                id: id,
+                pw: pw,
             })
-        }).then(res => console.log(res));
+        }).then((res: any) => {
+            console.log(res)
+        });
     }
 
     return (
@@ -68,15 +87,23 @@ function LoginForm() {
             <Logo className ="trello-logo" src="/img/trello-logo-blue.png" />
             <Container>
                 <form onSubmit={handleSubmit}>
-                    <Input id="id" name="id" type="email" placeholder="Enter email" />
+                    <Input
+                        id="id"
+                        name="id"
+                        type="text"
+                        onChange={changeId}
+                        value={id}
+                        placeholder="Enter email" />
                     <Input
                         id="password"
-                        name="password"
+                        name="pw"
                         type="password"
+                        onChange={changePw}
+                        value={pw}
                         placeholder="Enter password"
                     />
                     <Button type="submit">Login</Button>
-                    
+                    <div>{cookie}</div>
                 </form>
             </Container>
 
