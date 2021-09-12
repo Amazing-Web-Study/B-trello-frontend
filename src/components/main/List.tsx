@@ -79,7 +79,7 @@ const Cards = ({ list_id }: any) => {
                     <div className="list_item" key={card._id}>
                         
                         <input type="checkbox" 
-                        checked={card.state == 0 ? false : true} 
+                        checked={card.state == 1 ? false : true} 
                         onChange={() => {
                             updateCard(card._id,card.state) 
                             setTimeout(() => {

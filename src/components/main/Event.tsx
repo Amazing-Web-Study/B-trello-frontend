@@ -22,7 +22,6 @@ export const addCard = (list_id : any , e : any) => {
 }
 
 export const addList = (user_id : any , e : any) => {
-    console.log(e.value);
     if(!e.value){
         return
     }
@@ -62,8 +61,8 @@ export const delList = (list_id : string) => {
 }
 
 export const updateCard = (card_id : string, state : number) => {
-    state = state  == 0 ? 1 : 0;
-
+    state = state  == 1 ? 2 : 1;
+    console.log(state)
     const data = { 
         "state" : state
     }
@@ -74,11 +73,12 @@ export const updateCard = (card_id : string, state : number) => {
         headers : {
             'Content-Type' : 'application/json'
         }
+        
     })
+    .catch(error => console.error('Error : ', new Error(error)))
 }
 
 export const is_visible = (element: any) => {
-    console.log(element.style.display);
     if (element.style.display === 'block') {
         element.style.display = 'none';
     } else {
