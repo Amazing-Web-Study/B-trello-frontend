@@ -2,9 +2,9 @@ import React from 'react';
 import LoginForm from "../login/LoginForm";
 
 
-function Login() {
+const Login = ({history}: any) => {
     return (
-        <LoginForm />
+        <LoginForm history={history} />
     );
 }
 

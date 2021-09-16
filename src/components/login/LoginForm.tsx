@@ -50,7 +50,7 @@ const Logo = styled.img`
     transform: translate(-50%, -50%);
 `
 
-function LoginForm() {
+function LoginForm(history:any) {
 
     const [id, setId] = useState('')
     const [pw, setPw] = useState('')
@@ -78,7 +78,9 @@ function LoginForm() {
                 pw: pw,
             })
         }).then((res: any) => {
-            console.log(res)
+            if(res.status === 201) {
+                history.history.push('/')
+            }
         });
     }
 
