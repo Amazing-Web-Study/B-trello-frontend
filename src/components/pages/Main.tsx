@@ -33,7 +33,7 @@ function Main({history}: any) {
             {/* <GlobalStyle> */}
                 <div className="main">
                     <div className="container">
-                        <List />
+                        <List history={history} />
                     </div>
                 </div>
             {/* </GlobalStyle> */}
