@@ -9,7 +9,13 @@ export const List = () => {
     let [version, setVersion] = useState(1)
 
     useEffect(() => {
-        fetch('http://localhost:8000/api/list/612b4db38a78da44945d05a5')
+        fetch('http://localhost:8000/api/list', {
+            credentials: 'include',
+            headers: {
+                'Accept': 'application/json',
+                'Content-Type': 'application/json',
+            },
+        })
             .then(data => data.json())
             .then(data => setLists(data))
     }, [version])

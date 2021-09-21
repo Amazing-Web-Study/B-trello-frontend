@@ -14,16 +14,19 @@ const GlobalStyle = createGlobalStyle`
     }
 `
 async function getLists() {
-    const response = await fetch('http://localhost:8000/api/list/612b4db38a78da44945d05a5')
+    const response = await fetch('http://localhost:8000/api/list', {
+        credentials: 'include',
+        headers: {
+            'Accept': 'application/json',
+            'Content-Type': 'application/json',
+        },
+    })
     return response
 }
 
-function Main() {
+function Main({history}: any) {
     const [state] = useFetch(getLists, []);
     const { loading, data: lists, error }: any = state
-
-    if (loading) return <div>로딩중</div>
-    if (error) return <div>{error}</div>
 
     return (
         <Layout>
