@@ -32,7 +32,7 @@ export const List = () => {
                                 delList(list._id)
                                 setTimeout(() => {
                                     setVersion(version += 10)
-                                },0)
+                                },100)
                             }}>
                             X
                         </a>    
@@ -51,7 +51,7 @@ export const List = () => {
                             addList('612b4db38a78da44945d05a5', document.getElementById("list_title"))
                             setTimeout(() => {
                                 setVersion(version += 10)
-                            },0)
+                            },100)
                         }}>
                         Add list
                     </a>
@@ -90,7 +90,7 @@ const Cards = ({ list_id }: any) => {
                             updateCard(card._id,card.state) 
                             setTimeout(() => {
                                 setVersion(version += 10)
-                            })
+                            }, 100)
                          }} />
                         {card.content}
                         <button
@@ -100,7 +100,7 @@ const Cards = ({ list_id }: any) => {
                                 delCard(card._id)
                                 setTimeout(() => {
                                     setVersion(version += 10)
-                                }, 0)
+                                }, 100)
                             }}>
                             X
                         </button>
@@ -116,7 +116,7 @@ const Cards = ({ list_id }: any) => {
                         addCard(list_id, document.getElementById("value_" + list_id))
                         setTimeout(() => {
                             setVersion(version += 10)
-                        }, 0)
+                        }, 100)
                     }
                     }>Add card</button>
             </div>

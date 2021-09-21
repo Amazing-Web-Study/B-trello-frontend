@@ -13,27 +13,16 @@ const GlobalStyle = createGlobalStyle`
         background-color: #0079bf;
     }
 `
-async function getLists() {
-    const response = await fetch('http://localhost:8000/api/list', {
-        credentials: 'include',
-        headers: {
-            'Accept': 'application/json',
-            'Content-Type': 'application/json',
-        },
-    })
-    return response
-}
 
-function Main({history}: any) {
-    const [state] = useFetch(getLists, []);
-    const { loading, data: lists, error }: any = state
+
+function Main() {
 
     return (
         <Layout>
             {/* <GlobalStyle> */}
                 <div className="main">
                     <div className="container">
-                        <List history={history} />
+                        <List />
                     </div>
                 </div>
             {/* </GlobalStyle> */}
