@@ -1,7 +1,8 @@
-import React from 'react';
+import React, {useEffect} from 'react';
 import Layout from "../common/layout/Layout";
 import { createGlobalStyle } from 'styled-components';
 import { List } from "../main/List";
+import {useCookies} from "react-cookie";
 import useFetch from "../../api/api";
 
 const GlobalStyle = createGlobalStyle`
@@ -15,7 +16,20 @@ const GlobalStyle = createGlobalStyle`
 `
 
 
-function Main() {
+function Main({history}: any) {
+
+    const [cookies, setCookie, removeCookie] = useCookies(['user']);
+
+    useEffect(() => {
+        if (cookies.user === undefined) {
+            history.push('/login')
+        }
+    }, [])
+
+    const logout = () => {
+        removeCookie("user")
+        history.push('/login')
+    }
 
     return (
         <Layout>
@@ -24,6 +38,7 @@ function Main() {
                     <div className="container">
                         <List />
                     </div>
+                    <button type='button' onClick={logout}>로그아웃</button>
                 </div>
             {/* </GlobalStyle> */}
         </Layout>
