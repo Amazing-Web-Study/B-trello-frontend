@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useState} from 'react';
 import styled from "styled-components";
 
 const Container = styled.div`
@@ -48,30 +48,56 @@ const Title = styled.h2`
     transform: translate(-50%, -50%);
 `
 
-function JoinForm() {
+function JoinForm(history: any) {
+
+    const [id, setId] = useState('')
+    const [name, setName] = useState('')
+    const [pw, setPw] = useState('')
+
+    const changeId = (value: any) => {
+        setId(value.target.value)
+    }
+    const changePw = (value: any) => {
+        setPw(value.target.value)
+    }
+    const changeName = (value: any) => {
+        setName(value.target.value)
+    }
     
-    const handleSubmit = () => {
+    const handleSubmit = (e: any) => {
+        e.preventDefault()
         fetch('http://localhost:8000/api/user/sign-up', {
             method: "POST",
+            headers: {
+                'Accept': 'application/json',
+                'Content-Type': 'application/json' //content type을 json 형식으로 보내주기 위함입니다.
+            },
             body: JSON.stringify({
-                id: "",
-                name: "",
-                password: "",
+                id: id,
+                name: name,
+                pw: pw,
             })
-        }).then(res => console.log(res));
+        }).then((res: any) => {
+            console.log(res)
+            if(res.status === 201) {
+                history.history.push('/login')
+            }
+        });
     }
     return(
         <div>
             <Title>Create a Trello Account</Title>
             <Container>
                 <form onSubmit={handleSubmit}>
-                    <Input id="id" name="name" placeholder="Name" />
-                    <Input id="id" name="id" type="email" placeholder="email" />
+                    <Input id="name" name="name" placeholder="Name" value={name} onChange={changeName} />
+                    <Input id="id" name="id" type="email" placeholder="email" value={id} onChange={changeId} />
                     <Input
                         id="password"
                         name="password"
                         type="password"
                         placeholder="password"
+                        value={pw}
+                        onChange={changePw}
                     />
                     <Button type="submit">Create New Account</Button>
                 </form>

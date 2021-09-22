@@ -54,7 +54,6 @@ function LoginForm(history:any) {
 
     const [id, setId] = useState('')
     const [pw, setPw] = useState('')
-    const [cookie, setCookie] = useState('')
 
     const changeId = (value: any) => {
         setId(value.target.value)
@@ -105,7 +104,6 @@ function LoginForm(history:any) {
                         placeholder="Enter password"
                     />
                     <Button type="submit">Login</Button>
-                    <div>{cookie}</div>
                 </form>
             </Container>
 

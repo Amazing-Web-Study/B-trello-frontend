@@ -1,9 +1,9 @@
 import React from 'react';
 import JoinForm from "../join/JoinForm";
 
-function Join() {
+const Join = ({history}: any) => {
     return (
-        <JoinForm />
+        <JoinForm history={history} />
     );
 }
 
