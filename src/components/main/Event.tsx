@@ -1,6 +1,6 @@
 import React from "react";
 
-export const addCard = (list_id : any , e : any) => {
+export const addCard = async (list_id : any , e : any) => {
     if(!e.value){
         return
     }
@@ -9,65 +9,61 @@ export const addCard = (list_id : any , e : any) => {
         content : e.value
     }
 
-    fetch('http://localhost:8000/api/card', {
+    await fetch('http://localhost:8000/api/card', {
         method : 'POST',
         body : JSON.stringify(data),
         headers : {
             'Content-Type' : 'application/json'
         } 
     })
-    .catch(error => console.error('Error : ', new Error(error)))
 
     return e.value;
 }
 
-export const addList = (user_id : any , e : any) => {
+export const addList = async (e : any) => {
     if(!e.value){
         return
     }
     const data = {
-        user_id : user_id,
         title : e.value
     }
 
-    fetch('http://localhost:8000/api/list', {
+    await fetch('http://localhost:8000/api/list', {
         method : 'POST',
         body : JSON.stringify(data),
+        credentials: 'include',
         headers : {
             'Content-Type' : 'application/json'
         }
     })
-    .catch(error => console.error('Error : ', new Error(error)))
 }
 
-export const delCard = (card_id : string) => {
-    fetch('http://localhost:8000/api/card/'+ card_id, {
+export const delCard = async (card_id : string) => {
+    await fetch('http://localhost:8000/api/card/'+ card_id, {
         method : 'delete',
         headers : {
             'Content-Type' : 'application/json'
         }
     })
-    .catch(error => console.error('Error : ', new Error(error)))
 }
 
-export const delList = (list_id : string) => {
-    fetch('http://localhost:8000/api/list/'+ list_id, {
+export const delList = async (list_id : string) => {
+    await fetch('http://localhost:8000/api/list/'+ list_id, {
         method : 'delete',
         headers : {
             'Content-Type' : 'application/json'
         }
     })
-    .catch(error => console.error('Error : ', new Error(error)))
 }
 
-export const updateCard = (card_id : string, state : number) => {
+export const updateCard = async (card_id : string, state : number) => {
     state = state  == 1 ? 2 : 1;
     console.log(state)
     const data = { 
         "state" : state
     }
 
-    fetch('http://localhost:8000/api/card/'+ card_id, {
+    await fetch('http://localhost:8000/api/card/'+ card_id, {
         method : 'PUT',
         body : JSON.stringify(data),
         headers : {
@@ -75,7 +71,6 @@ export const updateCard = (card_id : string, state : number) => {
         }
         
     })
-    .catch(error => console.error('Error : ', new Error(error)))
 }
 
 export const is_visible = (element: any) => {

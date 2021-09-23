@@ -30,9 +30,8 @@ export const List = () => {
                             className="x_btn"
                             onClick={() => { 
                                 delList(list._id)
-                                setTimeout(() => {
-                                    setVersion(version += 10)
-                                },100)
+                                    .then(() => setVersion(version += 1))
+                                    .catch(error => console.error('Error : ', new Error(error)))
                             }}>
                             X
                         </a>    
@@ -48,10 +47,9 @@ export const List = () => {
                     <a
                         className={"add_btn"}
                         onClick={() => {
-                            addList('612b4db38a78da44945d05a5', document.getElementById("list_title"))
-                            setTimeout(() => {
-                                setVersion(version += 10)
-                            },100)
+                            addList(document.getElementById("list_title"))
+                                .then(() => setVersion(version += 1))
+                                .catch(error => console.error('Error : ', new Error(error)))
                         }}>
                         Add list
                     </a>
@@ -87,10 +85,9 @@ const Cards = ({ list_id }: any) => {
                         <input type="checkbox" 
                         checked={card.state == 1 ? false : true} 
                         onChange={() => {
-                            updateCard(card._id,card.state) 
-                            setTimeout(() => {
-                                setVersion(version += 10)
-                            }, 100)
+                            updateCard(card._id,card.state)
+                                .then(() => setVersion(version += 1))
+                                .catch(error => console.error('Error : ', new Error(error)))
                          }} />
                         {card.content}
                         <button
@@ -98,9 +95,8 @@ const Cards = ({ list_id }: any) => {
                             className="x_btn"
                             onClick={() => {
                                 delCard(card._id)
-                                setTimeout(() => {
-                                    setVersion(version += 10)
-                                }, 100)
+                                    .then(() => setVersion(version += 1))
+                                    .catch(error => console.error('Error : ', new Error(error)))
                             }}>
                             X
                         </button>
@@ -114,9 +110,8 @@ const Cards = ({ list_id }: any) => {
                     className="add_btn"
                     onClick={() => {
                         addCard(list_id, document.getElementById("value_" + list_id))
-                        setTimeout(() => {
-                            setVersion(version += 10)
-                        }, 100)
+                            .then(() => setVersion(version += 10))
+                            .catch(error => console.error('Error : ', new Error(error)))
                     }
                     }>Add card</button>
             </div>

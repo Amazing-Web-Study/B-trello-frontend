@@ -1,6 +1,7 @@
 import React, {useState} from 'react';
 import styled from "styled-components";
 import './LoginForm.css';
+import {Link} from "react-router-dom";
 
 
 const Container = styled.div`
@@ -103,6 +104,7 @@ function LoginForm(history:any) {
                         value={pw}
                         placeholder="Enter password"
                     />
+                    아이디가 없으신가요? <Link to='/register'>회원가입</Link>
                     <Button type="submit">Login</Button>
                 </form>
             </Container>
